@@ -14,7 +14,7 @@
   programs.dconf.enable = true;
 
   programs.bash.shellAliases = {
-    nrs = "sudo nixos-rebuild switch --flake /etc/nixos#trollface";
+    nrs = "sudo nixos-rebuild switch --flake $HOME/.config/nixos#trollface";
   };
 
   home-manager.useGlobalPkgs = true;
@@ -47,6 +47,7 @@
 	fish
 	libxkbcommon
 	vlc
+	github-cli
      ];
    };
 
