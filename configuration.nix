@@ -13,14 +13,11 @@
 
   programs.dconf.enable = true;
 
+  hardware.enableRedistributableFirmware = true;
+
   programs.bash.shellAliases = {
     nrs = "sudo nixos-rebuild switch --flake $HOME/.config/nixos#trollface";
   };
-
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-
-  home-manager.users.mystic = import ./home.nix;
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
