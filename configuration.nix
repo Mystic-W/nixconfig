@@ -36,11 +36,8 @@
      packages = with pkgs; [
 	tree
 	git
-	kitty
 	vim
 	neovim
-	hyprpaper
-	hyprlock
 	fish
 	libxkbcommon
 	vlc
@@ -48,9 +45,6 @@
 	gcc
      ];
    };
-
-  programs.firefox.enable = true;
-  programs.hyprland.enable = true;
 
   services.xserver.enable = true;
 
@@ -75,6 +69,14 @@
     yelp
     totem
   ];
+
+  xdg.terminal-exec = {
+    enable = true;
+    settings = {
+      default = [ "kitty.desktop" ];
+      GNOME = [ "kitty.desktop" ];
+    };
+  };
 
   services.xserver.xkb = {
     layout = "latam";

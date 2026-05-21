@@ -13,6 +13,10 @@
     helium.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
+  programs.kitty = {
+    enable = true;
+  };
+
   dconf.enable = true;
 
   dconf.settings = {
@@ -40,6 +44,27 @@
       # dark mode
       color-scheme = "prefer-dark";
       show-battery-percentage = true;
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+      ];
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      name = "Open Kitty";
+      command = "kitty";
+      binding = "<Super>t";
+    };
+
+    "org/gnome/settings-daemon/plugins/housekeeping" = {
+      donation-reminder-enabled = false;
+    };
+
+    "org/gnome/desktop/default-applications/terminal" = {
+      exec = "kitty";
+      exec-arg = "";
     };
   };
 
