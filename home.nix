@@ -23,7 +23,7 @@
     };
 
     "org/gnome/desktop/wm/keybindings" = {
-      show-desktop = [ "<Super>d" ]
+      show-desktop = [ "<Super>d" ];
     };
     
     "org/gnome/desktop/peripherals/mouse" = {
