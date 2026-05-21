@@ -35,6 +35,7 @@
     "org/gnome/desktop/interface" = {
       # dark mode
       color-scheme = "prefer-dark";
+      show-battery-percentage = "true";
     };
   };
 
