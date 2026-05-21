@@ -45,6 +45,7 @@
 	libxkbcommon
 	vlc
 	github-cli
+	gcc
      ];
    };
 

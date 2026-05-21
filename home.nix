@@ -21,6 +21,21 @@
         "caps:unlock_on_press"
       ];
     };
+
+    "org/gnome/desktop/peripherals/mouse" = {
+      # "flat" = no adaptive mouse acceleration
+      accel-profile = "flat";
+    };
+
+    "org/gnome/desktop/peripherals/touchpad" = {
+      # bottom/right touchpad area acts as right click
+      click-method = "areas";
+    };
+
+    "org/gnome/desktop/interface" = {
+      # dark mode
+      color-scheme = "prefer-dark";
+    };
   };
 
   home.file.".config/xkb/compat/caps_win".text = ''
