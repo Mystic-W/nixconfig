@@ -44,6 +44,7 @@
       # dark mode
       color-scheme = "prefer-dark";
       show-battery-percentage = true;
+      enable-hot-corners = false;
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
@@ -66,6 +67,7 @@
       exec = "kitty";
       exec-arg = "";
     };
+
   };
 
   home.file.".config/xkb/compat/caps_win".text = ''
