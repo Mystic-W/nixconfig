@@ -10,6 +10,12 @@
 
   home.packages = [
     pkgs.libxkbcommon
+    pkgs.gcc
+    pkgs.gdb
+    pkgs.cmake
+    pkgs.ninja
+    pkgs.clang-tools
+
     helium.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
@@ -68,6 +74,29 @@
       exec-arg = "";
     };
 
+  };
+
+  programs.vscode = {
+    enable = true;
+
+    package = pkgs.vscode.fhs;
+
+    profiles.default = {
+      extensions = with pkgs.vscode-extensions; [
+        github.copilot
+	github.copilot-chat
+
+        #c++ extension pack listed explicitly 
+	ms-vscode.cpptools
+	ms-vscode.cmake-tools
+      ];
+
+      userSettings = {
+        "github.copilot.enable" = {
+	  "*" = true;
+	};
+      };
+    };
   };
 
   home.file.".config/xkb/compat/caps_win".text = ''

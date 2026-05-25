@@ -42,9 +42,23 @@
 	libxkbcommon
 	vlc
 	github-cli
-	gcc
      ];
    };
+  
+  programs.steam = {
+    enable = true;
+
+    # Optional: enable this to use Steam Remote Play.
+    # remotePlay.openFirewall = true;
+
+    # Optional: enable this to host Source dedicated servers.
+    # dedicatedServer.openFirewall = false;
+
+    # useful for many proton games, apparently
+    protontricks.enable = true;
+  };
+
+  programs.gamemode.enable = true;
 
   services.xserver.enable = true;
 
@@ -86,6 +100,8 @@
   console.useXkbConfig = true;
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
