@@ -94,14 +94,12 @@
     gnome-contacts
     yelp
     totem
+    gnome-console
   ];
 
-  xdg.terminal-exec = {
+  programs.nautilus-open-any-terminal = {
     enable = true;
-    settings = {
-      default = [ "kitty.desktop" ];
-      GNOME = [ "kitty.desktop" ];
-    };
+    terminal = "kitty";
   };
 
   services.xserver.xkb = {

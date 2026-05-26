@@ -115,6 +115,14 @@
       caps:unlock_on_press = +caps_win(unlock_on_press)
   '';
 
+  xdg.terminal-exec = {
+    enable = true;
+    settings = {
+      GNOME = [ "kitty.desktop" ];
+      default = [ "kitty.desktop" ];
+    };
+  };
+
   xdg.mimeApps = {
     enable = true;
 
