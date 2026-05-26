@@ -44,6 +44,7 @@
     "org/gnome/desktop/peripherals/touchpad" = {
       # bottom/right touchpad area acts as right click
       click-method = "areas";
+      disable-while-typing = true;
     };
 
     "org/gnome/desktop/interface" = {

@@ -15,9 +15,21 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  programs.bash.shellAliases = {
-    nrs = "sudo nixos-rebuild switch --flake $HOME/.config/nixos#trollface";
+
+  programs.bash = {
+    shellAliases = {
+      nrs = "sudo nixos-rebuild switch --flake $HOME/.config/nixos#trollface";
+      nixcfg = "cd ~/.config/nixos";
+    };
+
+    interactiveShellInit = ''
+      bind "set completion-ignore-case on"
+      bind "set show-all-if-ambiguous on"
+      bind "set completion-map-case on"
+    '';
   };
+
+  
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
