@@ -1,6 +1,14 @@
 { config, pkgs, lib, helium, ... }:
 
 {
+  
+  imports = [
+    ./home-modules/hyprland.nix
+    ./home-modules/waybar.nix
+    ./home-modules/rofi.nix
+    ./home-modules/hyprpaper.nix
+  ];
+
   home.username = "mystic";
   home.homeDirectory = "/home/mystic";
 
@@ -19,62 +27,10 @@
     helium.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
+  services.gnome-keyring.enable = true;
+
   programs.kitty = {
     enable = true;
-  };
-
-  dconf.enable = true;
-
-  dconf.settings = {
-    "org/gnome/desktop/input-sources" = {
-      xkb-options = [
-        "caps:unlock_on_press"
-      ];
-    };
-
-    "org/gnome/desktop/wm/keybindings" = {
-      show-desktop = [ "<Super>d" ];
-    };
-    
-    "org/gnome/desktop/peripherals/mouse" = {
-      # "flat" = no adaptive mouse acceleration
-      accel-profile = "flat";
-    };
-
-    "org/gnome/desktop/peripherals/touchpad" = {
-      # bottom/right touchpad area acts as right click
-      click-method = "areas";
-      disable-while-typing = true;
-    };
-
-    "org/gnome/desktop/interface" = {
-      # dark mode
-      color-scheme = "prefer-dark";
-      show-battery-percentage = true;
-      enable-hot-corners = false;
-    };
-
-    "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = [
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-      ];
-    };
-
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-      name = "Open Kitty";
-      command = "kitty";
-      binding = "<Super>t";
-    };
-
-    "org/gnome/settings-daemon/plugins/housekeeping" = {
-      donation-reminder-enabled = false;
-    };
-
-    "org/gnome/desktop/default-applications/terminal" = {
-      exec = "kitty";
-      exec-arg = "";
-    };
-
   };
 
   programs.vscode = {
@@ -85,11 +41,14 @@
     profiles.default = {
       extensions = with pkgs.vscode-extensions; [
         github.copilot
-	github.copilot-chat
+	      github.copilot-chat
 
         #c++ extension pack listed explicitly 
-	ms-vscode.cpptools
-	ms-vscode.cmake-tools
+	      ms-vscode.cpptools
+	      ms-vscode.cmake-tools
+	      ms-vsliveshare.vsliveshare
+        
+        mshr-h.veriloghdl
       ];
 
       userSettings = {
@@ -99,6 +58,16 @@
       };
     };
   };
+  
+  home.file.".vscode/argv.json" = {
+    force = true;
+    text = ''
+      {
+        "enable-crash-reporter": false,
+        "password-store": "gnome-libsecret"
+      }
+    '';
+  }; 
 
   home.file.".config/xkb/compat/caps_win".text = ''
     partial xkb_compatibility "unlock_on_press" {
@@ -118,7 +87,6 @@
   xdg.terminal-exec = {
     enable = true;
     settings = {
-      GNOME = [ "kitty.desktop" ];
       default = [ "kitty.desktop" ];
     };
   };

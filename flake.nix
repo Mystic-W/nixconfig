@@ -9,13 +9,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-25.11";
+    };
+
     helium = {
       url = "github:schembriaiden/helium-browser-nix-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, helium, ... }:
+  outputs = { self, nixpkgs, home-manager, nixvim, helium, ... }:
   let
     system = "x86_64-linux";
   in {
@@ -28,6 +32,8 @@
 
       modules = [
         ./configuration.nix
+
+	nixvim.nixosModules.nixvim
 
         home-manager.nixosModules.home-manager
         {

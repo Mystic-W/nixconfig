@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./modules/nixvim.nix
     ];
 
 
@@ -29,7 +30,12 @@
     '';
   };
 
-  
+  fonts.packages = with pkgs; [
+    font-awesome
+    nerd-fonts.jetbrains-mono
+  ];
+
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -48,12 +54,14 @@
      packages = with pkgs; [
 	tree
 	git
-	vim
-	neovim
 	fish
 	libxkbcommon
 	vlc
 	github-cli
+	wev
+  python3
+  zip
+  unzip
      ];
    };
   
@@ -77,30 +85,11 @@
   # Habilitar el gestor de pantalla GDM.
   services.displayManager.gdm.enable = true;
 
-  # Habilitar el entorno de escritorio GNOME.
-  services.desktopManager.gnome.enable = true;
-  
-  environment.gnome.excludePackages = with pkgs; [
-    gnome-calendar
-    gnome-weather
-    simple-scan
-    gnome-tour
+  services.gnome.gnome-keyring.enable = true;
 
-    #test
-    epiphany
-    geary
-    gnome-maps
-    gnome-music
-    gnome-contacts
-    yelp
-    totem
-    gnome-console
-  ];
+  security.pam.services.gdm.enableGnomeKeyring = true;
 
-  programs.nautilus-open-any-terminal = {
-    enable = true;
-    terminal = "kitty";
-  };
+  programs.hyprland.enable = true;
 
   services.xserver.xkb = {
     layout = "latam";
@@ -115,10 +104,9 @@
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
-  # environment.systemPackages = with pkgs; [
-  #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #   wget
-  # ];
+  environment.systemPackages = with pkgs; [
+    brightnessctl
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
